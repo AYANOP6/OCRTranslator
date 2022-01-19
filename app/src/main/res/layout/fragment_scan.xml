@@ -35,9 +35,9 @@
                 android:layout_marginStart="20dp"
                 android:layout_toEndOf="@+id/translateToLable"
                 android:background="@drawable/spinner_background"
-                android:dropDownWidth="120dp"
+                android:dropDownWidth="100dp"
                 android:dropDownVerticalOffset="43dp"
-                android:padding="5dp"
+                android:paddingStart="8dp"
                 android:spinnerMode="dropdown" />
         </RelativeLayout>
 
@@ -110,7 +110,7 @@ The standard chunk of Lorem Ipsum used since"
         android:layout_width="30dp"
         android:layout_height="30dp"
     android:layout_below="@+id/toolBarFrameLayout"
-        android:layout_marginTop="2dp"
+        android:layout_marginTop="5dp"
      android:layout_centerHorizontal="true"
         android:visibility="gone"/>
 

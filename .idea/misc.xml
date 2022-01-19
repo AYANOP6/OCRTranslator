@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/rhlyd/.gradle/caches/transforms-3/716d0fdad14c063d4790541cde1d3048/transformed/appcompat-1.4.0/res/layout/support_simple_spinner_dropdown_item.xml" value="0.22760416666666666" />
+        <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/drawable/arrow_right.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/drawable/custom_btn.xml" value="0.264" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/drawable/dropdown_arrow.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/drawable/frame_view_background.xml" value="0.2557291666666667" />
@@ -16,8 +17,9 @@
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/drawable/translator.xml" value="0.2557291666666667" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/activity_main.xml" value="0.22150139017608897" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/activity_translator.xml" value="0.23958333333333334" />
-        <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/fragment_manual_translator.xml" value="0.22552083333333334" />
-        <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/fragment_scan.xml" value="0.2" />
+        <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/fragment_blank.xml" value="0.23958333333333334" />
+        <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/fragment_manual_translator.xml" value="0.264" />
+        <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/fragment_scan.xml" value="0.264" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/fragment_scan_text.xml" value="0.264" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/layout/spinner_dropdown_text.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/rhlyd/AndroidStudioProjects/OCRTranslator/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1" />

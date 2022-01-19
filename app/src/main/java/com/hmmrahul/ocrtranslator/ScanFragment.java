@@ -41,6 +41,7 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
     FragmentScanBinding fragmentScanBinding;
     Bitmap bitmap;
     int languageCode = FirebaseTranslateLanguage.HI;
+    String inputText = null;
 
     public ScanFragment() {
         // Required empty public constructor
@@ -54,6 +55,8 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
         fragmentScanBinding = FragmentScanBinding.inflate(inflater, container, false);
 
         setUpSpinner();
+
+        //used for TextView Scrolling effect
         fragmentScanBinding.scannedText.setMovementMethod(new ScrollingMovementMethod());
         fragmentScanBinding.translatedText.setMovementMethod(new ScrollingMovementMethod());
 
@@ -65,6 +68,15 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
             }
         });
 
+        //        mainBinding.copyBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String scannedText = mainBinding.textData.getText().toString();
+//                copyToClipBoard(scannedText);
+//                translateText(scannedText);
+//            }
+//        });
+
         fragmentScanBinding.spinner.setOnItemSelectedListener(this);
 
         return fragmentScanBinding.getRoot();
@@ -74,7 +86,6 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getContext(), R.array.languages, R.layout.spinner_dropdown_text);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_text);
         fragmentScanBinding.spinner.setAdapter(adapter);
-
     }
 
     @Override
@@ -109,7 +120,8 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
                 stringBuilder.append(textBlock.getValue());
                 stringBuilder.append("\n");
             }
-            translateText(stringBuilder.toString());
+            inputText = stringBuilder.toString();
+            translateText(inputText);
 
         }
     }
@@ -125,6 +137,11 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
         fragmentScanBinding.animationView.setVisibility(View.GONE);
         fragmentScanBinding.scanNowFrame.setVisibility(View.GONE);
         fragmentScanBinding.tipsText.setVisibility(View.GONE);
+        fragmentScanBinding.translatedTextLable.setVisibility(View.GONE);
+        fragmentScanBinding.translatedText.setVisibility(View.GONE);
+        fragmentScanBinding.scannedTextLable.setVisibility(View.GONE);
+        fragmentScanBinding.scannedText.setVisibility(View.GONE);
+        fragmentScanBinding.bottomLinearLayout.setVisibility(View.GONE);
         fragmentScanBinding.scannedTextProgressBar.setVisibility(View.VISIBLE);
         fragmentScanBinding.translatingTextLable.setVisibility(View.VISIBLE);
         translator.downloadModelIfNeeded(conditions).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -141,6 +158,7 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
                                 fragmentScanBinding.translatedTextLable.setVisibility(View.VISIBLE);
                                 fragmentScanBinding.translatedText.setVisibility(View.VISIBLE);
                                 fragmentScanBinding.scannedText.setText(input);
+                                fragmentScanBinding.bottomLinearLayout.setVisibility(View.VISIBLE);
                                 fragmentScanBinding.scanNowFrame.setVisibility(View.VISIBLE);
                                 fragmentScanBinding.scanNowText.setText("Retake");
                                 fragmentScanBinding.copyTextFrame.setVisibility(View.VISIBLE);
@@ -155,7 +173,10 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
                         fragmentScanBinding.animationView.setVisibility(View.VISIBLE);
                         fragmentScanBinding.tipsText.setVisibility(View.VISIBLE);
                         fragmentScanBinding.translatingTextLable.setVisibility(View.GONE);
+                        fragmentScanBinding.bottomLinearLayout.setVisibility(View.VISIBLE);
                         fragmentScanBinding.scanNowFrame.setVisibility(View.VISIBLE);
+                        fragmentScanBinding.scanNowText.setText("Scan Now");
+                        fragmentScanBinding.copyTextFrame.setVisibility(View.GONE);
                         Toast.makeText(getContext(), "Fail to Translate" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
@@ -164,6 +185,14 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                fragmentScanBinding.scannedTextProgressBar.setVisibility(View.GONE);
+                fragmentScanBinding.animationView.setVisibility(View.VISIBLE);
+                fragmentScanBinding.tipsText.setVisibility(View.VISIBLE);
+                fragmentScanBinding.translatingTextLable.setVisibility(View.GONE);
+                fragmentScanBinding.bottomLinearLayout.setVisibility(View.VISIBLE);
+                fragmentScanBinding.scanNowFrame.setVisibility(View.VISIBLE);
+                fragmentScanBinding.scanNowText.setText("Scan Now");
+                fragmentScanBinding.copyTextFrame.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "Fail to Download Language Model" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -172,17 +201,62 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
     public int getLanguageCode(String language) {
         int languageCode = 0;
         switch (language) {
+            case "Afrikaans":
+                languageCode = FirebaseTranslateLanguage.AF;
+                break;
+            case "Arabic":
+                languageCode = FirebaseTranslateLanguage.AR;
+                break;
             case "Bengali":
                 languageCode = FirebaseTranslateLanguage.BN;
                 break;
-            case "Hindi":
-                languageCode = FirebaseTranslateLanguage.HI;
+            case "German":
+                languageCode = FirebaseTranslateLanguage.DE;
+                break;
+            case "English":
+                languageCode = FirebaseTranslateLanguage.EN;
+                break;
+            case "Spanish":
+                languageCode = FirebaseTranslateLanguage.ES;
+                break;
+            case "French":
+                languageCode = FirebaseTranslateLanguage.FR;
                 break;
             case "Gujarati":
                 languageCode = FirebaseTranslateLanguage.GU;
                 break;
-            case "Spanish":
-                languageCode = FirebaseTranslateLanguage.ES;
+            case "Hindi":
+                languageCode = FirebaseTranslateLanguage.HI;
+                break;
+            case "Italian":
+                languageCode = FirebaseTranslateLanguage.IT;
+                break;
+            case "Japanese":
+                languageCode = FirebaseTranslateLanguage.JA;
+                break;
+            case "Kannada":
+                languageCode = FirebaseTranslateLanguage.KN;
+                break;
+            case "Korean":
+                languageCode = FirebaseTranslateLanguage.KO;
+                break;
+            case "Marathi":
+                languageCode = FirebaseTranslateLanguage.MR;
+                break;
+            case "Malay":
+                languageCode = FirebaseTranslateLanguage.MS;
+                break;
+            case "Russian":
+                languageCode = FirebaseTranslateLanguage.RU;
+                break;
+            case "Tamil":
+                languageCode = FirebaseTranslateLanguage.TA;
+                break;
+            case "Telugu":
+                languageCode = FirebaseTranslateLanguage.TE;
+                break;
+            case "Urdu":
+                languageCode = FirebaseTranslateLanguage.UR;
                 break;
             default:
                 languageCode = 0;
@@ -193,17 +267,10 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long l) {
         String text = adapterView.getItemAtPosition(pos).toString();
-//        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
-        fragmentScanBinding.scannedTextLable.setVisibility(View.GONE);
-        fragmentScanBinding.scannedText.setVisibility(View.GONE);
-        fragmentScanBinding.translatedTextLable.setVisibility(View.GONE);
-        fragmentScanBinding.translatedText.setVisibility(View.GONE);
-        fragmentScanBinding.copyTextFrame.setVisibility(View.GONE);
-
-        fragmentScanBinding.animationView.setVisibility(View.VISIBLE);
-        fragmentScanBinding.tipsText.setVisibility(View.VISIBLE);
-        fragmentScanBinding.scanNowText.setText("Scan Now");
         languageCode = getLanguageCode(text);
+        if (inputText != null) {
+            translateText(inputText);
+        }
     }
 
     @Override

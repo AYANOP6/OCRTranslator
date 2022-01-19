@@ -61,14 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        mainBinding.copyBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String scannedText = mainBinding.textData.getText().toString();
-//                copyToClipBoard(scannedText);
-//                translateText(scannedText);
-//            }
-//        });
+
     }
 
     private void copyToClipBoard(String text) {
