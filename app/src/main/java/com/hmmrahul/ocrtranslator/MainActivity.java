@@ -64,11 +64,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void copyToClipBoard(String text) {
-        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("Copied data", text);
-        clipboardManager.setPrimaryClip(clipData);
-        Toast.makeText(MainActivity.this, "Copied to Clipboard", Toast.LENGTH_SHORT).show();
-    }
 
 }

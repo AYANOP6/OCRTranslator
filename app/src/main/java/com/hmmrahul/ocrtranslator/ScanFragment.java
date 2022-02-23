@@ -2,6 +2,9 @@ package com.hmmrahul.ocrtranslator;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -68,14 +71,13 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
             }
         });
 
-        //        mainBinding.copyBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String scannedText = mainBinding.textData.getText().toString();
-//                copyToClipBoard(scannedText);
-//                translateText(scannedText);
-//            }
-//        });
+        fragmentScanBinding.copyText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String scannedText = fragmentScanBinding.translatedText.getText().toString();
+                copyToClipBoard(scannedText);
+            }
+        });
 
         fragmentScanBinding.spinner.setOnItemSelectedListener(this);
 
@@ -276,5 +278,12 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    private void copyToClipBoard(String text) {
+        ClipboardManager clipboardManager = (ClipboardManager)getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("Copied data", text);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(getActivity().getApplicationContext(), "Copied to Clipboard", Toast.LENGTH_SHORT).show();
     }
 }
