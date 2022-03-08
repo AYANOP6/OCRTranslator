@@ -7,10 +7,10 @@
 ## **My Learnings**
 - Firebase Translation API
 - Text-To-Speech Implementation
-- How Locale Works in Android
+- How Locale Works in Android (To support Multiple Languages in Android)
 
 ## **Project Status**
-Project is Completed. Give it a Try By Downloding it From [Here.]()
+Project is Completed. Give it a Try By Downloding it From [Here.](https://drive.google.com/file/d/1uc1xc-7uLoO1OQ2EdIzRSuFofasoHp33/view?usp=sharing)
 
 ## **Project Screen Shot(s)**
 
