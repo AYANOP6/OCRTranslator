@@ -1,5 +1,8 @@
 package com.hmmrahul.ocrtranslator;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
@@ -55,11 +58,19 @@ public class ManualTranslatorFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 inputText = fragmentManualTranslatorBinding.typedText.getText().toString();
-                translateText(inputText);
+                if(!inputText.isEmpty())
+                {
+                    translateText(inputText);
+                }
             }
         });
-
-
+        fragmentManualTranslatorBinding.copyText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String copyscannedText = fragmentManualTranslatorBinding.translatedText.getText().toString();
+                copyToClipBoard(copyscannedText);
+            }
+        });
         fragmentManualTranslatorBinding.txtToSpeech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -238,7 +249,7 @@ public class ManualTranslatorFragment extends Fragment {
                                 fragmentManualTranslatorBinding.typedText.setText(input);
                                 fragmentManualTranslatorBinding.bottomLinearLayout.setVisibility(View.VISIBLE);
                                 fragmentManualTranslatorBinding.scanNowFrame.setVisibility(View.VISIBLE);
-                                fragmentManualTranslatorBinding.scanNowText.setText("Retake");
+                                fragmentManualTranslatorBinding.scanNowText.setText("Retranslate");
                                 fragmentManualTranslatorBinding.txtToSpeech.setVisibility(View.VISIBLE);
                                 fragmentManualTranslatorBinding.copyTextFrame.setVisibility(View.VISIBLE);
                                 fragmentManualTranslatorBinding.scannedTextLable.setVisibility(View.VISIBLE);
@@ -272,6 +283,12 @@ public class ManualTranslatorFragment extends Fragment {
                 Toast.makeText(getContext(), "Fail to Download Language Model" + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void copyToClipBoard(String text) {
+        ClipboardManager clipboardManager = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("Copied data", text);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(getActivity().getApplicationContext(), "Copied to Clipboard", Toast.LENGTH_SHORT).show();
     }
 
 }
