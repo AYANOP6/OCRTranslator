@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ public class ManualTranslatorFragment extends Fragment {
     int tolanguageCode = -1;
     String inputText;
     TextToSpeech textToSpeech;
-    String scannedText;
+    String translatedText;
     Locale languageT2S = Locale.ENGLISH;
 
     public ManualTranslatorFragment() {
@@ -58,10 +59,7 @@ public class ManualTranslatorFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 inputText = fragmentManualTranslatorBinding.typedText.getText().toString();
-                if(!inputText.isEmpty())
-                {
-                    translateText(inputText);
-                }
+                translateText(inputText);
             }
         });
         fragmentManualTranslatorBinding.copyText.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +81,7 @@ public class ManualTranslatorFragment extends Fragment {
                                 Toast.makeText(getContext(), "Language Not Supported", Toast.LENGTH_SHORT).show();
                             } else {
                                 textToSpeech.setSpeechRate(0.9f);
-                                textToSpeech.speak(scannedText, TextToSpeech.QUEUE_FLUSH, null, null);
+                                textToSpeech.speak(translatedText, TextToSpeech.QUEUE_FLUSH, null, null);
                                 Toast.makeText(getContext(), "Playing Translated Text", Toast.LENGTH_LONG).show();
                             }
                         } else {
@@ -244,6 +242,7 @@ public class ManualTranslatorFragment extends Fragment {
                                 fragmentManualTranslatorBinding.scannedTextProgressBar.setVisibility(View.GONE);
                                 fragmentManualTranslatorBinding.translatingTextLable.setVisibility(View.GONE);
                                 fragmentManualTranslatorBinding.translatedText.setText(s);
+                                translatedText = s;
                                 fragmentManualTranslatorBinding.translatedTextLable.setVisibility(View.VISIBLE);
                                 fragmentManualTranslatorBinding.translatedText.setVisibility(View.VISIBLE);
                                 fragmentManualTranslatorBinding.typedText.setText(input);

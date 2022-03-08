@@ -340,6 +340,10 @@ public class ScanFragment extends Fragment implements AdapterView.OnItemSelected
         languageCode = getLanguageCode(text);
         if (inputText != null) {
             translateText(inputText);
+            if (textToSpeech != null) {
+                textToSpeech.stop();
+                textToSpeech.shutdown();
+            }
         }
     }
 
